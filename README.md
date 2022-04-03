@@ -1,4 +1,6 @@
-# sierpinski
+# Sierpiński
+
+A [vuejs](https://vuejs.org/) component that draws the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)
 
 ## Project setup
 ```
