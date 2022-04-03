@@ -2,6 +2,10 @@
 
 A [vuejs](https://vuejs.org/) component that draws the [Sierpiński triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle)
 
+### Example
+
+https://sierpinski.surge.sh/
+
 ## Project setup
 ```
 npm install
