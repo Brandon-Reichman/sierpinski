@@ -4,6 +4,7 @@ let h = side * (Math.sqrt(3)/2);
 let delay = 25;
 let stop = true;
 let lastPoint = null;
+let size = 3;
 
 const coordinates = {
 	a: { x: 0, y: - h / 2 },
@@ -30,7 +31,7 @@ const sierpinski = {
 	},
 	drawPoint (ctx) {
 		let newPoint = this.getNewPoint();
-		ctx.fillRect(newPoint.x, newPoint.y,3,3);
+		ctx.fillRect(newPoint.x, newPoint.y,this.size,this.size);
 		this.lastPoint = newPoint;
 	},
 	async drawMidPoint(ctx, point) {
@@ -40,7 +41,7 @@ const sierpinski = {
 			y: (randC.y + point.y) / 2,
 		}
 		if(!this.stop){
-			ctx.fillRect(newPoint.x, newPoint.y, 3, 3);
+			ctx.fillRect(newPoint.x, newPoint.y, this.size, this.size);
 			this.lastPoint = newPoint;
 			await this.sleep();
 			await this.drawMidPoint(ctx, newPoint);
@@ -95,6 +96,7 @@ const sierpinski = {
 	delay,
 	stop,
 	lastPoint,
+	size,
 }
 
 export default sierpinski;
