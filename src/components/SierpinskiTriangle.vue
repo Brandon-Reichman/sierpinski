@@ -1,7 +1,14 @@
 <template>
     <div class="wrapper">
-        <h2 v-if="!insideTriangle" style="color:red;">Please chose a point inside of the triangle</h2>
-        <canvas style="border:solid 1px blue;" @click="clickTriangle" id="triangle" width="1200" height="1200"></canvas>
+        <form @submit.prevent="" @change="handleChange">
+            <input type="number" v-model="delay" />
+            <label>ms / dot</label>
+        </form>
+        <canvas style="border:solid 1px blue;" id="triangle" width="1200" height="1200"></canvas>
+    </div>
+    <div>
+        <button @click="buttonClick('stop')" class="button stop-button">Stop</button>
+        <button @click="buttonClick('start')" class="button start-button">Start</button>
     </div>
 </template>
 
@@ -12,23 +19,23 @@ export default {
     name: "SierpinskiTriangle",
     mixins: [sierpinski],
     methods: {
-        async clickTriangle(e) {
-            if(this.insideTriangle === false ){
-                this.clicked = true;
-                let canvas = document.querySelector("#triangle");
-                let ctx = canvas.getContext("2d");
-                let rect = canvas.getBoundingClientRect();
-                let position = {
-                    x: e.clientX - rect.left - (canvas.width / 2),
-                    y: e.clientY - rect.bottom + (canvas.height / 2),
-                }
-                if(sierpinski.checkPoint(position)){
-                    this.insideTriangle = true;
-                    ctx.fillRect(position.x, position.y,3,3);
-                    await sierpinski.drawMidPoint(ctx, position);
-                } else {
-                    this.insideTriangle = false;
-                }
+        handleChange() {
+            sierpinski.delay = this.delay;
+        },
+        async buttonClick(type) {
+            let canvas = document.querySelector("#triangle");
+            let ctx = canvas.getContext("2d");
+            switch(type)
+            {
+                case 'stop':
+                    sierpinski.stop = true;
+                    break;
+                case 'start':
+                    if(sierpinski.lastPoint === null) {
+                        sierpinski.drawPoint(ctx);
+                    }
+                    sierpinski.stop = false;
+                    await sierpinski.drawMidPoint(ctx, sierpinski.lastPoint);
             }
         },
     },
@@ -40,12 +47,21 @@ export default {
     data() {
         return {
             delay: sierpinski.delay,
-            insideTriangle: false,
         }
     }
 }
 </script>
 
 <style scoped>
-
+    .button{
+        border:none;
+        width:25%;
+        margin:1em;
+    }
+    .start-button{
+        background-color: #41d541;
+    }
+    .stop-button{
+        background-color: #e1485b;
+    }
 </style>
