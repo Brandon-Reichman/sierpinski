@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <div>
         <form class="param-form" @submit.prevent="" @change="handleChange">
             <input type="range" min="0" max="5000" v-model="delay" />
             <input type="number" v-model="delay" />
@@ -10,13 +11,14 @@
             <label> {{ size }} Dot Size (px)</label>
         </form>
         <canvas style="border:solid 1px blue;" id="triangle" width="1200" height="1200"></canvas>
-    </div>
-    <div>
-        <button @click="clearCanvas" class="button">Clear</button>
-    </div>
-    <div>
-        <button @click="buttonClick('stop')" class="button stop-button">Stop</button>
-        <button @click="buttonClick('start')" class="button start-button">Start</button>
+        </div>
+        <div>
+            <button @click="clearCanvas" class="button">Clear</button>
+        </div>
+        <div>
+            <button @click="buttonClick('stop')" class="button stop-button">Stop</button>
+            <button @click="buttonClick('start')" class="button start-button">Start</button>
+        </div>
     </div>
 </template>
 
