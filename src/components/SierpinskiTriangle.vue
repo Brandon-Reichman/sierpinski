@@ -1,23 +1,29 @@
 <template>
     <div class="wrapper">
-        <div>
-        <form class="param-form" @submit.prevent="" @change="handleChange">
-            <input type="range" min="0" max="5000" v-model="delay" />
-            <input type="number" v-model="delay" />
-            <label> Speed (ms / dot)</label>
-            <span class="form-space"></span>
-            <input type="range" min="0" max="10" v-model="size" />
-            <input type="number" v-model="size" />
-            <label> {{ size }} Dot Size (px)</label>
-        </form>
-        <canvas style="border:solid 1px blue;" id="triangle" width="1200" height="1200"></canvas>
+        <div class="param-form-container">
+            <b-form class="param-form" @submit.prevent="" @change="handleChange">
+                <div class="row">
+                    <b-input type="range" min="0" max="5000" v-model="delay" />
+                    <b-input type="number" v-model="delay" />
+                    <label> Speed (ms / dot)</label>
+                </div>
+                <div class="row">
+                    <span class="form-space"></span>
+                    <b-input type="range" min="0" max="10" v-model="size" />
+                    <b-input type="number" v-model="size" />
+                    <label> {{ size }} Dot Size (px)</label>
+                </div>
+            </b-form>
         </div>
-        <div>
-            <button @click="clearCanvas" class="button">Clear</button>
-        </div>
-        <div>
-            <button @click="buttonClick('stop')" class="button stop-button">Stop</button>
-            <button @click="buttonClick('start')" class="button start-button">Start</button>
+        <canvas style="border:solid 1px blue;" id="triangle" width="600" height="600"></canvas>
+        <div class="button-container">
+            <div>
+                <b-button @click="clearCanvas" class="button">Clear</b-button>
+            </div>
+            <div>
+                <b-button @click="buttonClick('stop')" class="button stop-button">Stop</b-button>
+                <b-button @click="buttonClick('start')" class="button start-button">Start</b-button>
+            </div>
         </div>
     </div>
 </template>
@@ -76,7 +82,7 @@ export default {
         border:none;
         margin:1em;
         width:100%;
-        max-width:550px;
+        max-width:300px;
     }
     .start-button{
         background-color: #41d541;
@@ -89,5 +95,15 @@ export default {
     }
     .param-form{
         margin-block:2em;
+    }
+    .param-form-container{
+        margin:auto;
+        width:45%;
+    }
+    #triangle{
+    }
+    .button-container{
+        margin:auto;
+        max-width:75%;
     }
 </style>

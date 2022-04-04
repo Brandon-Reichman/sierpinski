@@ -1,10 +1,10 @@
-let side = 1000;
+let side = 500;
 let h = side * (Math.sqrt(3)/2);
 
 let delay = 25;
 let stop = true;
 let lastPoint = null;
-let size = 3;
+let size = 1;
 
 const coordinates = {
 	a: { x: 0, y: - h / 2 },
